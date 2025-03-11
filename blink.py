@@ -19,6 +19,19 @@
 
 import machine, neopixel, time
 
+
+def wink_led(led) :
+
+    cur_clr = led[0]
+    # wink the LED ...
+    for i in range(0, 3):
+        led[0] = [0, 0, 0]
+        led.write()
+        time.sleep_ms(100)
+        led[0] = cur_clr
+        led.write()
+        time.sleep_ms(100)
+
 #---------------------------------------------------------------------------------
 # Transition the current LED value to a given RGB value.
 # This function assumes pixel color/channel values are 8 bit (0-255)
@@ -70,12 +83,7 @@ def led_transition(led, R, G, B):
 
         # indicate process ... add a small delay
         print(".", end='')
-        time.sleep_ms(50)
-
-    # done  - set final color and end the current output line
-    led[0] = [R, G, B]
-    led.write()
-    print("")
+        time.sleep_ms(20)
 
 
 def blinky():
@@ -86,19 +94,43 @@ def blinky():
     led[0] = (0, 0, 0)
     led.write()
 
-    print("Off to Blue:", end='')
+    print("\n-----------------------------------------------------------")
+    print("On-board LED color example...")
+    print("-----------------------------------------------------------\n")
+    time.sleep_ms(100);
+
+    # print("Off to Blue:", end='')
+    print("<Off>\t", end='')
     led_transition(led, 0, 0, 255)
+    print(" <Blue>")
+    wink_led(led)
 
-    print("Blue to Red:", end='')
+    print("<Blue>\t", end='')
     led_transition(led, 255, 0, 0)
+    print(" <Red>")
+    wink_led(led)
 
-    print("Red to Green:", end='')
+    print("<Red>\t", end='')
     led_transition(led, 0, 255, 0)
+    print(" <Green>")
+    wink_led(led)
 
-    print("Green to Off:", end='')
+    print("<Green>\t", end='')
+    led_transition(led, 255, 255, 0)
+    print(" <Yellow>")
+    wink_led(led)
+
+    print("<Yellow>", end='')
+    led_transition(led, 255, 255, 255)
+    print(" <White>")
+    wink_led(led)
+
+    print("<White>\t", end='')
     led_transition(led, 0, 0, 0)
+    print(" <Off>")
 
-    print("Color changing example complete.")
+    print("\nDone!\n")
+
     led[0]=(0,0,0)
     led.write()
 
