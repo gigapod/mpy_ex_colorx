@@ -21,6 +21,9 @@ import machine, neopixel, time
 
 
 def wink_led(led) :
+    """
+    @brief Wink the LED by turning it off and on three times.
+    """
 
     cur_clr = led[0]
     # wink the LED ...
