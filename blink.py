@@ -17,7 +17,7 @@
 # @license MIT
 #
 
-import machine, neopixel, time
+import machine, neopixel, time 
 
 
 def wink_led(led) :
@@ -86,7 +86,11 @@ def led_transition(led, R, G, B):
         time.sleep_ms(20)
 
 
+#---------------------------------------------------------------------------------
+# Blinky example
+
 def blinky():
+
     pin = machine.Pin("NEOPIXEL")
     led = neopixel.NeoPixel(pin, 1)
 
@@ -97,7 +101,7 @@ def blinky():
     print("\n-----------------------------------------------------------")
     print("On-board LED color example...")
     print("-----------------------------------------------------------\n")
-    time.sleep_ms(100);
+    time.sleep_ms(100)
 
     # print("Off to Blue:", end='')
     print("<Off>\t", end='')
@@ -134,27 +138,4 @@ def blinky():
     led[0]=(0,0,0)
     led.write()
 
-    # for i in range(0, 255, 5)
-    #
-    #     print(".", end='')
-    #     led[0] = (i, 0, 255-i)
-    #     led.write()
-    #     time.sleep_ms(100)
-    #
-    # print("\nRed to Green:", end='')
-    # for i in range(0, 255, 5):
-    #     print(".", end='')
-    #     led[0] = (255-i, i, 0)
-    #     led.write()
-    #     time.sleep_ms(100)
-    #
-    # print("\nGreen to Blue:", end='')
-    # for i in range(0, 255, 5):
-    #     print(".", end='')
-    #     led[0] = (0, 255-i, i)
-    #     led.write()
-    #     time.sleep_ms(100)
-
-    # led[0] = (0, 0, 0)
-    # led.write()
-    # print("\nBlink Example Done")
+    
