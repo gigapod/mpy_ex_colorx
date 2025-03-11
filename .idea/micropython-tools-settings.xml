@@ -4,7 +4,7 @@
     <option name="activeStubsPackage" value="micropython-v1_25_0_preview-rp2-rpi_pico2_w-stubs" />
     <option name="cachedFTPScriptPath" />
     <option name="pluginEnabled" value="true" />
-    <option name="portName" value="/dev/cu.usbmodem51101" />
+    <option name="portName" value="/dev/cu.usbmodem1301" />
     <option name="settingsVersion" value="1" />
   </component>
 </project>
