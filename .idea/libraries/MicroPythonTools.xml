@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MicroPythonTools" type="python">
+    <CLASSES>
+      <root url="file://$APPLICATION_PLUGINS_DIR$/micropython-tools-jetbrains/stubs/micropython-v1_25_0_preview-rp2-rpi_pico2_w-stubs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
