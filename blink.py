@@ -17,27 +17,47 @@
 # @license MIT
 #
 
-import machine, neopixel, time 
+import machine
+import neopixel
+import time
+
+# ---------------------------------------------------------------------------------
+# Wink the LED by turning it off and
 
 
-def wink_led(led) :
+def wink_led(led):
     """
     @brief Wink the LED by turning it off and on three times.
+
+    @param led The LED object to be controlled. It is expected to be a `neopixel.NeoPixel` object.
+
+    @details
+    - Saves the current color of the LED.
+    - Turns the LED off and on three times with a delay of 100 milliseconds between each state change.
+    - Restores the LED to its original color after winking.
+
     """
 
+    # safe the current color
     cur_clr = led[0]
-    # wink the LED ...
+
+    # wink the LED ... off and on three times
     for i in range(0, 3):
-        led[0] = [0, 0, 0]
+        led[0] = [0, 0, 0]  # off
         led.write()
+
         time.sleep_ms(100)
+
+        # restore the color
         led[0] = cur_clr
         led.write()
         time.sleep_ms(100)
 
-#---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
 # Transition the current LED value to a given RGB value.
 # This function assumes pixel color/channel values are 8 bit (0-255)
+
+
 def led_transition(led, R, G, B):
     """
         @brief Transition the current LED value to a given RGB value.
@@ -65,20 +85,20 @@ def led_transition(led, R, G, B):
     clrCurrent = list(led[0])
 
     # How many increments during the transition
-    inc = 51 # 255/5
+    inc = 51  # 255/5
 
-    # how much to change a value every increment
-    rInc = (R - clrCurrent[0])/inc
-    gInc = (G - clrCurrent[1])/inc
-    bInc = (B - clrCurrent[2])/inc
+    # how much to change a color component value every increment
+    rInc = (R - clrCurrent[0]) / inc
+    gInc = (G - clrCurrent[1]) / inc
+    bInc = (B - clrCurrent[2]) / inc
 
     # loop - adjust color during each increment.
     for i in range(0, inc):
 
-        # add the desired increment to each color value. Use route() to convert the float value to an integer
+        # add the desired increment to each color component value. Use round() to convert the float value to an integer
         clrCurrent[0] = round(clrCurrent[0] + rInc)
         clrCurrent[1] = round(clrCurrent[1] + gInc)
-        clrCurrent[2] =  round(clrCurrent[2] + bInc)
+        clrCurrent[2] = round(clrCurrent[2] + bInc)
 
         # set the new LED color and write (enable) it
         led[0] = clrCurrent
@@ -89,13 +109,23 @@ def led_transition(led, R, G, B):
         time.sleep_ms(20)
 
 
-#---------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------
 # Blinky example
 
 def blinky():
+    """
+       @brief Demonstrates LED color transitions using the onboard NeoPixel.
 
+       @details
+       - Initializes the NeoPixel LED.
+       - Transitions the LED through a series of colors: Blue, Red, Green, Yellow, White, and Off.
+       - Winks the LED (turns it off and on three times) after each color transition.
+
+       """
+
+    # the the pin object for the pin defined as "NEOPIXEL"
     pin = machine.Pin("NEOPIXEL")
-    led = neopixel.NeoPixel(pin, 1)
+    led = neopixel.NeoPixel(pin, 1)  # create a NeoPixel object with 1 LED
 
     # start at off
     led[0] = (0, 0, 0)
@@ -106,7 +136,7 @@ def blinky():
     print("-----------------------------------------------------------\n")
     time.sleep_ms(100)
 
-    # print("Off to Blue:", end='')
+    # transition through a series of colors
     print("<Off>\t", end='')
     led_transition(led, 0, 0, 255)
     print(" <Blue>")
@@ -138,7 +168,6 @@ def blinky():
 
     print("\nDone!\n")
 
-    led[0]=(0,0,0)
+    # turn off the LED
+    led[0] = (0, 0, 0)
     led.write()
-
-    
